@@ -22,8 +22,11 @@
   },
   "homepage": "https://github.com/git-illite/proShop#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
