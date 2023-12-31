@@ -7,3 +7,38 @@ main{
 h3{
   padding:1rem 0;
 }
+select.form-control{
+  -webkit-appearance: menulist!important;
+  -moz-appearance: menulist!important;
+  -ms-appearance: menulist!important;
+  -o-appearance: menulist!important;
+  appearance: menulist!important;
+  padding: .75rem 0.5rem;
+}
+h1{
+  font-size:1.8rem;
+  padding:1rem 0;
+}
+h2{
+  font-size:1.4rem;
+  padding:0.5rem 0;
+}
+.dropdown{
+  align-self: flex-start;
+  min-width:180px;
+}
+/* .form-control {
+  display: block;
+  width: 100%;
+ 
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  appearance: none;
+  background-color: #f7f7f9;
+  background-clip: padding-box;
+  border: 0 solid var(--bs-border-color);
+  border-radius: 0;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+} */
