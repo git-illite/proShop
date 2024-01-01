@@ -4,8 +4,10 @@ import connectDB from './config/db.js'
 import colors from 'colors'
 import productRoutes from './routes/productRoute.js'
 import { notFound,errorHandler } from './middleware/errorMiddleware.js'
+import authUser from './routes/userRoutes.js'
 dotenv.config();
 const app = express();
+app.use(express.json())
 
 connectDB()
 
@@ -14,6 +16,7 @@ app.get('/',(req,res) =>{
 })
 
 app.use('/api/products',productRoutes)
+app.use('/api/users',authUser)
 
 app.use(notFound)
 
