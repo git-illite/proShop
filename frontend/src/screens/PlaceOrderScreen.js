@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message.js";
+import { createOrder } from "../actions/orderActions.js";
 //import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps.js";
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
 
   //CALCULATE PRICE
@@ -24,11 +26,31 @@ const PlaceOrderScreen = () => {
     Number(cart.taxPrice) +
     Number(cart.shippingPrice)
   ).toFixed(2);
-  const orderPrice= (qty, price) => addDecimal(Number(qty*price))
+  const orderPrice = (qty, price) => addDecimal(Number(qty * price));
+
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
 
   const placeOrderHandler = () => {
-    console.log("order");
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
   };
+
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`);
+    }
+    //eslint-disable-next-line
+  }, [navigate, success]);
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4 />
@@ -74,7 +96,8 @@ const PlaceOrderScreen = () => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price} = ${orderPrice(item.qty,item.price)}
+                          {item.qty} x ${item.price} = $
+                          {orderPrice(item.qty, item.price)}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -113,6 +136,9 @@ const PlaceOrderScreen = () => {
                   <Col>Total</Col>
                   <Col>${cart.totalPrice}</Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {error && <Message variant="danger">{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
