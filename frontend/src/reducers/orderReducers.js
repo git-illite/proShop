@@ -12,6 +12,7 @@ import {
   ORDER_LIST_USER_REQUEST,
   ORDER_LIST_USER_SUCCESS,
   ORDER_LIST_USER_FAIL,
+  ORDER_LIST_RESET,
 } from "../constants/orderConstants";
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -31,6 +32,8 @@ export const orderCreateReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+    case ORDER_LIST_RESET:
+      return { orders: [] };
     default:
       return state;
   }
@@ -97,6 +100,10 @@ export const orderGetUserOrdersReducer = (state = { orders: [] }, action) => {
       return {
         loading: false,
         error: action.payload,
+      };
+    case ORDER_PAY_RESET:
+      return {
+        orders: [],
       };
     default:
       return state;

@@ -31,7 +31,6 @@ const ProfileScreen = () => {
     error: errorOrders,
     orders,
   } = orderGetUserOrders;
-  console.log("orders: " + orders);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -125,43 +124,43 @@ const ProfileScreen = () => {
                 <th>DELIVERED</th>
                 <th></th>
               </tr>
-              <tbody>
-                {orders?.map((order) => (
-                  <tr key={order._id}>
-                    <td>{order.id}</td>
-                    <td>{order.createdAt.substring(0, 10)}</td>
-                    <td>{order.totalPrice}</td>
-                    <td>
-                      {order.isPaid ? (
-                        order.paidAt.substring(0, 10)
-                      ) : (
-                        <i
-                          className="fas fa-times"
-                          style={{ color: "red" }}
-                        ></i>
-                      )}
-                    </td>
-                    <td>
-                      {order.isDelivered ? (
-                        order.deliveredAt.substring(0, 10)
-                      ) : (
-                        <i
-                          className="fas fa-times"
-                          style={{ color: "red" }}
-                        ></i>
-                      )}
-                    </td>
-                    <td>
-                      <LinkContainer to={`/order/${order._id}`}>
-                        <Button className="btn-block" variant="light">
-                          Details
-                        </Button>
-                      </LinkContainer>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
             </thead>
+            <tbody>
+              {orders?.map((order, index) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>
+                    {order.createdAt ? order.createdAt.substring(0, 10) : "N/A"}
+                  </td>
+                  <td>{order.totalPrice}</td>
+                  <td>
+                    {order.isPaid ? (
+                      order.paidAt.substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </td>
+                  <td>
+                    {order.isDelivered ? (
+                      order.deliveredAt.substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </td>
+                  <td>
+                    <LinkContainer to={`/order/${order._id}`}>
+                      <Button
+                        className={`btn-sm ${
+                          index % 2 === 0 ? "btn-light" : "btn-dark"
+                        }`}
+                      >
+                        Details
+                      </Button>
+                    </LinkContainer>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </Table>
         )}
       </Col>

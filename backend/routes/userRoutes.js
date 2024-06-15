@@ -4,16 +4,17 @@ import {
   authUser,
   getUserProfile,
   updateUserProfile,
+  getUsers,
 } from "../controllers/userController.js";
-import { protect } from "../middleware/authMiddleWare.js";
+import { adminCheck, protect } from "../middleware/authMiddleWare.js";
 import { registerUser } from "../controllers/userController.js";
 
+router.route("/").post(registerUser).get(protect, adminCheck, getUsers);
 router.post("/login", authUser);
 router
   .route("/profile")
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
-router.route("/").post(registerUser);
 
 //router.route('/:id').get(getProductById)
 
