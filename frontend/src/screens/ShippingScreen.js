@@ -18,7 +18,6 @@ const ShippingScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    //console.log("submit handler called in shipping screen");
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     navigate("/payment");
   };

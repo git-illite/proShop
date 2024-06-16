@@ -37,7 +37,6 @@ const OrderScreen = () => {
         setSdkReady(true);
       };
       document.body.appendChild(script);
-      //console.log("client id : ", clientId);
     };
     if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
@@ -50,10 +49,8 @@ const OrderScreen = () => {
       }
     }
   }, [dispatch, id, successPay, order]);
-  //console.log("items: ", order);
 
   const successPaymentHandler = (paymentResult) => {
-    console.log("paymentResult: ", paymentResult);
     dispatch(payOrder(id, paymentResult));
   };
 

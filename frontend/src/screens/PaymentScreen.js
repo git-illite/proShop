@@ -19,7 +19,6 @@ const PaymentScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    //console.log("submit handler called in shipping screen");
     dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
   };

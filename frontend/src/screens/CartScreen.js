@@ -16,7 +16,6 @@ import { addToCart, removeFromCart } from "../actions/cartActions";
 const CartScreen = () => {
   const { id } = useParams();
   const productId = id;
-  //console.log("id: " + productId);
   const navigate = useNavigate();
   const location = useLocation();
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
@@ -45,7 +44,7 @@ const CartScreen = () => {
       navigate("/shipping");
     }
   };
-  //console.log("cart items: " + cartItems.length);
+  
 
   return (
     <Row>

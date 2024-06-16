@@ -9,9 +9,9 @@ const Header = () => {
   const { userInfo } = userLogin;
   const dispatch = useDispatch();
 
-  const logoutHandler = ()=>{
-    dispatch(logout())
-  }
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
   return (
     <header>
       <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
@@ -43,7 +43,19 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
-              
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title="Admin" id="adminMenu">
+                  <LinkContainer to="/admin/userlist">
+                    <NavDropdown.Item>Users</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/productlist">
+                    <NavDropdown.Item>Products</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/orderlist">
+                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

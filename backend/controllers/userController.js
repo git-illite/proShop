@@ -8,10 +8,10 @@ import generateToken from "../utils/generateToken.js";
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  //console.log('email: '+email+'\n'+'password: '+password);
+  
 
   const user = await User.findOne({ email });
-  //console.log(user);
+ 
 
   if (user && (await user.matchPassword(password))) {
     res.json({
@@ -43,7 +43,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
   });
-  //console.log(user);
+  
 
   if (user) {
     res.status(201);
