@@ -68,6 +68,7 @@ const ProfileScreen = () => {
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="name"
+              autoComplete="off"
               placeholder="Enter name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -80,6 +81,7 @@ const ProfileScreen = () => {
               type="email"
               placeholder="Enter email"
               value={email}
+              autoComplete="off"
               onChange={(e) => setEmail(e.target.value)}
             ></Form.Control>
           </Form.Group>
