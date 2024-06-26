@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message.js";
 import { getOrderDetails, payOrder } from "../actions/orderActions.js";
@@ -12,11 +12,11 @@ import { ORDER_PAY_RESET } from "../constants/orderConstants.js";
 const OrderScreen = () => {
   const dispatch = useDispatch();
   const [sdkReady, setSdkReady] = useState(false);
-  const navigate = useNavigate();
   const { id } = useParams();
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
 
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
@@ -38,7 +38,7 @@ const OrderScreen = () => {
       };
       document.body.appendChild(script);
     };
-    if (!order || successPay) {
+    if (!order ||  order._id !== id || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderDetails(id));
     } else if (!order.isPaid) {
@@ -53,6 +53,8 @@ const OrderScreen = () => {
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(id, paymentResult));
   };
+
+
 
   return loading ? (
     <Loader />

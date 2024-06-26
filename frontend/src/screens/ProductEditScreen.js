@@ -88,7 +88,7 @@ const ProductEditScreen = () => {
       console.error(error);
       setUploading(false);
     }
-    console.log("UPLOAD FILE HANDLER CALLED");
+    
   };
 
   return (
