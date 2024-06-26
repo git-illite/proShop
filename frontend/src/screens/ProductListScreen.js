@@ -42,7 +42,6 @@ const ProductListScreen = () => {
     if (!userInfo.isAdmin) {
       navigate("/login");
     }
-    console.log("CREATED PRODUCT:", createdProduct);
     if (successCreate) {
       navigate(`/admin/product/${createdProduct._id}/edit`);
     } else {
@@ -73,7 +72,7 @@ const ProductListScreen = () => {
         <Col>
           <h1>Products</h1>
         </Col>
-        <Col className="text-right">
+        <Col className="text-end">
           <Button className="my-3" onClick={createProductHandler}>
             <i className="fas fa-plus"></i> Create Product
           </Button>
