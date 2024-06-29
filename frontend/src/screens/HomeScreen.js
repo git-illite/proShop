@@ -3,26 +3,29 @@ import { Col, Row } from "react-bootstrap";
 import Product from "../components/Product";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
-import Loader from '../components/Loader.js'
-import Message from '../components/Message.js'
+import Loader from "../components/Loader.js";
+import Message from "../components/Message.js";
+import { useParams } from "react-router-dom";
 
 const HomeScreen = () => {
+  const { keyword } = useParams();
+
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
+    dispatch(listProducts(keyword));
+  }, [dispatch,keyword]);
 
   return (
     <>
       <h1>Latest products</h1>
 
       {loading ? (
-        <Loader/>
+        <Loader />
       ) : error ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           {products.map((product) => (
