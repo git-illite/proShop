@@ -44,6 +44,12 @@ const App = () => {
             />
 
             <Route path="/search/:keyword" Component={HomeScreen} />
+            <Route path="/page/:pageNumber" Component={HomeScreen} exact />
+            <Route
+              path="/search/:keyword/page/:pageNumber"
+              Component={HomeScreen}
+              exact
+            />
             <Route path="/" Component={HomeScreen} exact />
           </Routes>
         </Container>
