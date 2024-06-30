@@ -5,7 +5,7 @@ import asyncHandler from "express-async-handler";
 // @route GET /api/products
 // @access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 2;
+  const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {
@@ -16,7 +16,7 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const count = await Product.countDocuments({ ...keyword })
+  const count = await Product.countDocuments({ ...keyword });
   const products = await Product.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
@@ -94,11 +94,14 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 });
 // @desc create new review
-// @route Post /api/product:id/reviews
+// @route Post /api/:productid/reviews
 // @access Private
 const createProductReview = asyncHandler(async (req, res) => {
+  console.log("REQ BODY: ", req.body);
   const { rating, comment } = req.body;
+  console.log("ID: ", req.params.id);
   const product = await Product.findById(req.params.id);
+  console.log("PRODUCT: ", product);
   if (product) {
     const alreadyReviewed = product.reviews.find(
       (r) => r.user.toString() === req.user._id.toString()
@@ -108,6 +111,7 @@ const createProductReview = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Product already reviewed");
     }
+    console.log("USERNAME: ", req.user);
 
     const review = {
       name: req.user.name,
@@ -115,6 +119,7 @@ const createProductReview = asyncHandler(async (req, res) => {
       comment,
       user: req.user._id,
     };
+    console.log("REVIEW: ", review);
     product.reviews.push(review);
     product.numReviews = product.reviews.length;
     product.rating =
