@@ -16,6 +16,7 @@ import { listProductDetails, reviewProduct } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Meta from "../components/Meta";
 
 const ProductScreen = () => {
   const [qty, setQty] = useState(1);
@@ -28,13 +29,11 @@ const ProductScreen = () => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-
   const productReview = useSelector((state) => state.productReview);
   const { success: successReview, error: errorReview } = productReview;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const userName = userInfo.name
 
   useEffect(() => {
     if (successReview) {
@@ -51,7 +50,7 @@ const ProductScreen = () => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(reviewProduct(id, { rating, comment}));
+    dispatch(reviewProduct(id, { rating, comment }));
   };
 
   return (
@@ -65,6 +64,7 @@ const ProductScreen = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={6}>
               <Image src={product.image} alt={product.name}></Image>
@@ -153,9 +153,7 @@ const ProductScreen = () => {
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
                     <p>{review.createdAt.substring(0, 10)}</p>
-                    <p>
-                      {review.comment}
-                    </p>
+                    <p>{review.comment}</p>
                   </ListGroup.Item>
                 ))}
                 <ListGroupItem>
