@@ -12,6 +12,8 @@ import path from "path";
 
 dotenv.config();
 const app = express();
+const cors = require('cors');
+
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -19,6 +21,12 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 
 connectDB();
+
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://abdallah-proshop.onrender.com/',
+  credentials: true
+}));
 
 app.get("/", (req, res) => {
   res.send("Api is running!");
