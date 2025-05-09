@@ -22,7 +22,6 @@ app.use(express.json());
 
 connectDB();
 
-const cors = require('cors');
 app.use(cors({
   origin: 'https://abdallah-proshop.onrender.com/',
   credentials: true
