@@ -22,6 +22,10 @@ const HomeScreen = () => {
     dispatch(listProducts(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
 
+  console.log('home page console log: ',process.env.REACT_APP_API_BASE_URL)
+  console.log('home page console log port: ',process.env.PORT)
+
+  
   return (
     <>
       <Meta />

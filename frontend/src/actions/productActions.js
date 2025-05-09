@@ -21,7 +21,7 @@ import {
   PRODUCT_TOP_SUCCESS,
   PRODUCT_TOP_FAIL,
 } from "../constants/productConstants";
-import axios from "axios";
+import axios from '../axios.js';
 export const listProducts =
   (keyword = "", pageNumber = "") =>
   async (dispatch) => {

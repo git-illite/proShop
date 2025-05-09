@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from '../axios.js';
 import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,

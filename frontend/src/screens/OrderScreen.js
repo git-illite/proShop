@@ -19,7 +19,7 @@ import {
   deliverOrder,
 } from "../actions/orderActions.js";
 import Loader from "../components/Loader.js";
-import axios from "axios";
+import axios from '../axios.js';
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
