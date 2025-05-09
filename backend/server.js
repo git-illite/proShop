@@ -24,7 +24,7 @@ app.use(express.json());
 connectDB();
 
 app.use(cors({
-  origin: 'https://abdallah-proshop.onrender.com/',
+  origin: 'https://adenproshop.netlify.app',
   credentials: true
 }));
 
